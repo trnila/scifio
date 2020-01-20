@@ -418,9 +418,9 @@ public abstract class AbstractReader<M extends TypedMetadata, P extends DataPlan
 				s.read(bytes, 0, bytesToRead);
 			}
 			else {
-				final int rowLen = (int) (bpp * bounds.max(xIndex));
-				final int h = (int) bounds.max(yIndex);
+				final int rowLen = (int) (bpp * (bounds.max(xIndex) + 1));
 				final int y = (int) bounds.min(yIndex);
+				final int h = (int) bounds.max(yIndex) - y + 1;
 				long c = metadata.get(imageIndex).getAxisLength(Axes.CHANNEL);
 				if (c <= 0 || !metadata.get(imageIndex).isMultichannel()) c = 1;
 				for (int channel = 0; channel < c; channel++) {
